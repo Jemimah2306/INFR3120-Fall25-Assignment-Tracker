@@ -25,6 +25,21 @@ It is built with **Node.js**, **Express**, **MongoDB**, and **EJS**, with data s
 - **Nodemon** – For automatic server reload during development  
 
 ---
+## CSS Styling (Third-party libraries included)
+
+1. **Bootstrap**  
+   - Included via CDN: `https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css`  
+   - Provides ready-made CSS components and layout utilities.
+
+2. **Font Awesome**  
+   - Included via CDN: `https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css`  
+   - Provides icons for buttons, headers, and other UI elements.
+
+3. **Custom CSS**  
+   - Located in `public/css/mystyle.css`  
+   - Used to customize colors, tables, buttons, and the overall look of the application to make it unique.
+
+---
 
 ## Installation
 
