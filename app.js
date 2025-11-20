@@ -19,18 +19,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Sample data
-const tasksData = [
-    { _id: "1", title: "Math Assignment", description: "Chapter 5 exercises", dueDate: "2025-11-25", status: "Not Started" },
-    { _id: "2", title: "English Essay", description: "Write 1000 words", dueDate: "2025-11-27", status: "In Progress" },
-    { _id: "3", title: "Science Project", description: "Volcano model", dueDate: "2025-11-30", status: "Completed" },
-];
-
-app.use((req, res, next) => {
-    req.tasksData = tasksData;
-    next();
-});
-
 // Routes
 const taskRoutes = require("./routes/tasks");
 app.use("/tasks", taskRoutes);
