@@ -53,9 +53,9 @@
                             </select>
                         </td>
                         <td>
-                            <a href="/tasks/edit/<%= task._id %>" class="btn btn-primary btn-sm">Edit</a>
+                            <a href="/tasks/edit/<%= task._id %>" class="btn-edit btn-primary btn-sm">Edit</a>
                             <form action="/tasks/delete/<%= task._id %>" method="POST" class="d-inline" onsubmit="return confirmDelete()">
-                                <button class="btn btn-danger btn-sm">Delete</button>
+                                <button class="btn-delete btn-danger btn-sm">Delete</button>
                             </form>
                         </td>
                         <script>
