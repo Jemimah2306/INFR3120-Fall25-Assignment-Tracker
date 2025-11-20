@@ -103,7 +103,7 @@ MEAN/
 ## Deployment
 
 This site is deployed using Render (or your chosen cloud host) to demonstrate cloud hosting and version control best practices.
-View live site: [Render Deployment](https://assignment2-expressportfolio.onrender.com)  
+View live site: [Render Deployment](https://infr3120-fall25-assignment-tracker.onrender.com/)  
 
 All project files are tracked and maintained using Git for version control.
 .gitignore excludes any unnecessary or sensitive files. View repo: [GitHub Repository](https://github.com/Jemimah2306/INFR3120-Fall25-Assignment-Tracker)
