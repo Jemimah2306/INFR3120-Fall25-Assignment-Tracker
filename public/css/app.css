@@ -1,0 +1,11 @@
+/* Add shadow and basic transition */
+.logo-shadow {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3); /* Shadow behind logo */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Bounce effect on hover */
+.logo-shadow:hover {
+    transform: translateY(-10px); /* Moves logo up */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4); /* Bigger shadow on hover */
+}

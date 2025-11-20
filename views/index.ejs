@@ -1,0 +1,32 @@
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<!-- Landing Page Content -->
+<div class="container text-center mt-5">
+    <!-- App Logo -->
+    <img src="/images/logo.png" alt="Assignment Tracker Logo" class="mb-4" style="max-width: 200px;">
+
+    <!-- Site Name -->
+    <h1 class="display-4 mb-3">Assignment Tracker</h1>
+
+    <!-- Short Description -->
+    <p class="lead mb-4">
+        Keep track of all your school assignments in one place! Add new assignments, update existing ones,
+        and stay on top of deadlines with ease.
+    </p>
+
+    <!-- Hero Buttons -->
+    <div class="d-flex justify-content-center gap-3">
+        <!-- Hero Button: Create New Event -->
+        <a href="/tasks/add" class="btn btn-success btn-lg">
+            <i class="fa-solid fa-plus"></i> Add Assignment
+        </a>
+
+        <!-- Secondary Button: View Events -->
+        <a href="/tasks/list" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-calendar-days"></i> View Assignments
+        </a>
+    </div>
+</div>
+
+<%- include('./partials/footer.ejs') %>

@@ -1,0 +1,51 @@
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/nav.ejs') %>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="display-5"><%= title %></h1>
+            <form method="post">
+                <!-- Assignment Title -->
+                <div class="form-group mb-3">
+                    <label for="assignmentTitle">Assignment Title</label>
+                    <input type="text" class="form-control" id="assignmentTitle" placeholder="Enter assignment title" name="title" required>
+                </div>
+
+                <!-- Assignment Description -->
+                <div class="form-group mb-3">
+                    <label for="assignmentDescription">Description</label>
+                    <input type="text" class="form-control" id="assignmentDescription" placeholder="Enter description" name="description" required>
+                </div>
+
+                <!-- Due Date -->
+                <div class="form-group mb-3">
+                    <label for="assignmentDueDate">Due Date</label>
+                    <input type="date" class="form-control" id="assignmentDueDate" name="dueDate" required>
+                </div>
+
+                <!-- Status -->
+                <div class="form-group mb-3">
+                    <label for="assignmentStatus">Status</label>
+                    <select class="form-select status-select" id="assignmentStatus" name="status">
+                        <option value="Not Started" selected>Not Started</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+
+                <!-- Buttons -->
+                <div class="mt-3 d-flex justify-content-between">
+                    <button class="btn btn-success" type="submit">
+                        <i class="fas fa-plus-circle"></i> Add Assignment
+                    </button>
+                    <a href="/tasks/list" class="btn btn-warning">
+                        <i class="fas fa-undo"></i> Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
