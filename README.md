@@ -42,11 +42,11 @@ nodemon server.js
 **Open your browser and go to:**
 <http://localhost:3000/tasks/list>
 
-Add a new assignment: /tasks/add
-Edit an assignment: /tasks/edit/:id
-Delete an assignment: Use the delete button on the list page
-Search assignments: Use the search bar
-Sort assignments: Use the sorting options
+- Add a new assignment: /tasks/add
+- Edit an assignment: /tasks/edit/:id
+- Delete an assignment: Use the delete button on the list page
+- Search assignments: Use the search bar
+- Sort assignments: Use the sorting options
 
 ## Project Structure
 ```
