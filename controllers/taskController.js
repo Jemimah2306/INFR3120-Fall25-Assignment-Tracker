@@ -1,10 +1,10 @@
-const TaskModel = require("../models/Task");
+const Task = require("../models/Task");
 
-// List all tasks/assignments
-exports.listTasks = (req, res) => {
-    let tasks = TaskModel.getAllTasks();
+// List all tasks
+exports.listTasks = async (req, res) => {
+    let tasks = await Task.find();
 
-    // ----- Searching -----
+    // Searching
     if (req.query.search) {
         const searchTerm = req.query.search.toLowerCase();
         tasks = tasks.filter(t =>
@@ -12,7 +12,8 @@ exports.listTasks = (req, res) => {
             t.description.toLowerCase().includes(searchTerm)
         );
     }
-    // ----- Sorting -----
+
+    // Sorting
     if (req.query.sort) {
         const sortBy = req.query.sort;
         tasks = tasks.sort((a, b) => {
@@ -22,38 +23,35 @@ exports.listTasks = (req, res) => {
         });
     }
 
-    res.render("tasks/list", {
-        title: "Assignments",
-        tasks: tasks  // <-- matches EJS
-    });
+    res.render("tasks/list", { title: "Assignments", tasks });
 };
 
-// Show create task form
+// Show create form
 exports.showCreateForm = (req, res) => {
     res.render("tasks/add", { title: "Add Assignment" });
 };
 
 // Handle create task
-exports.createTask = (req, res) => {
-    TaskModel.addTask(req.body);
-    res.redirect("/tasks/list"); // redirect to main list page
+exports.createTask = async (req, res) => {
+    await Task.create(req.body);
+    res.redirect("/tasks/list");
 };
 
-// Show edit task form
-exports.showEditForm = (req, res) => {
-    const task = TaskModel.getTaskById(req.params.id);
+// Show edit form
+exports.showEditForm = async (req, res) => {
+    const task = await Task.findById(req.params.id);
     if (!task) return res.status(404).send("Assignment not found");
     res.render("tasks/edit", { title: "Edit Assignment", task });
 };
 
 // Handle edit task
-exports.editTask = (req, res) => {
-    TaskModel.updateTask(req.params.id, req.body);
-    res.redirect("/tasks/list"); // redirect to main list page
+exports.editTask = async (req, res) => {
+    await Task.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect("/tasks/list");
 };
 
 // Handle delete task
-exports.deleteTask = (req, res) => {
-    TaskModel.deleteTask(req.params.id);
-    res.redirect("/tasks/list"); // redirect to main list page
+exports.deleteTask = async (req, res) => {
+    await Task.findByIdAndDelete(req.params.id);
+    res.redirect("/tasks/list");
 };
