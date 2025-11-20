@@ -52,9 +52,6 @@ Sort assignments: Use the sorting options
 ```
 Assignment 3 Web
 MEAN/
-│ app.js
-│ package.json
-│ .env
 ├── controllers/
 │   └── taskController.js
 ├── models/
