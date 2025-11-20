@@ -28,7 +28,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Set initial color on page load
         updateStatusColor();
-    });
-
-    
+    });  
 });
