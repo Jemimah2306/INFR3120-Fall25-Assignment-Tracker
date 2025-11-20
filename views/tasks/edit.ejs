@@ -4,31 +4,37 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
+            <!-- Page Title -->
             <h1 class="display-5"><%= title %></h1>
+            <!-- Edit Assignment Form -->
             <form method="post">
-                <!-- Assignment Title -->
+                <!-- Assignment Title Input -->
                 <div class="form-group mb-3">
                     <label for="assignmentTitle">Assignment Title</label>
+                    <!-- Pre-fill input with current task title -->
                     <input type="text" class="form-control" id="assignmentTitle" placeholder="Enter assignment title"
                         name="title" value="<%= task.title %>" required>
                 </div>
 
-                <!-- Assignment Description -->
+                <!-- Assignment Description Input -->
                 <div class="form-group mb-3">
                     <label for="assignmentDescription">Description</label>
+                    <!-- Pre-fill input with current task description -->
                     <input type="text" class="form-control" id="assignmentDescription" placeholder="Enter description"
                         name="description" value="<%= task.description %>" required>
                 </div>
 
-                <!-- Due Date -->
+                <!-- Assignment Due Date Input -->
                 <div class="form-group mb-3">
                     <label for="assignmentDueDate">Due Date</label>
+                    <!-- Pre-fill input with current task due date -->
                     <input type="date" class="form-control" id="assignmentDueDate" name="dueDate" value="<%= task.dueDate %>" required>
                 </div>
 
-                <!-- Status -->
+                <!-- Assignment Status Dropdown -->
                 <div class="form-group mb-3">
                     <label for="assignmentStatus">Status</label>
+                    <!-- Pre-select current status -->
                     <select class="form-select status-select" id="assignmentStatus" name="status">
                         <option value="Not Started" <%= task.status === 'Not Started' ? 'selected' : '' %>>Not Started</option>
                         <option value="In Progress" <%= task.status === 'In Progress' ? 'selected' : '' %>>In Progress</option>
@@ -38,9 +44,11 @@
 
                 <!-- Buttons -->
                 <div class="mt-3 d-flex justify-content-between">
+                    <!-- Update Assignment button submits the form -->
                     <button class="btn btn-success" type="submit">
                         <i class="fas fa-edit"></i> Update Assignment
                     </button>
+                    <!-- Cancel button navigates back to the assignments list without making changes -->
                     <a href="/tasks/list" class="btn btn-warning">
                         <i class="fas fa-undo"></i> Cancel
                     </a>
