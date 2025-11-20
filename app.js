@@ -6,9 +6,9 @@ const mongoose = require('mongoose');
 const app = express();
 
 // connect to mongo
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log("Connection error:", err));
+  .catch(err => console.error("Connection error:", err));
   
 // Middleware
 app.use(express.urlencoded({ extended: true }));
