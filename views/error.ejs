@@ -1,6 +1,9 @@
 <%- include('partials/header') %>
 <%- include('partials/nav') %>
+<!-- Display error message -->
 <h1><%= message %></h1>
+<!-- Display HTTP status code (if available) -->
 <h2><%= error.status %></h2>
+<!-- Display stack trace for debugging purposes -->
 <pre><%= error.stack %></pre>
 <%- include('partials/footer') %>
