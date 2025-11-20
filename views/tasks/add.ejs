@@ -4,21 +4,23 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-8 offset-md-2">
+            <!-- Page title dynamically set via controller -->
             <h1 class="display-5"><%= title %></h1>
+            <!-- Edit Assignment Form -->
             <form method="post">
-                <!-- Assignment Title -->
+                <!-- Assignment Title Input-->
                 <div class="form-group mb-3">
                     <label for="assignmentTitle">Assignment Title</label>
                     <input type="text" class="form-control" id="assignmentTitle" placeholder="Enter assignment title" name="title" required>
                 </div>
 
-                <!-- Assignment Description -->
+                <!-- Assignment Description Input -->
                 <div class="form-group mb-3">
                     <label for="assignmentDescription">Description</label>
                     <input type="text" class="form-control" id="assignmentDescription" placeholder="Enter description" name="description" required>
                 </div>
 
-                <!-- Due Date -->
+                <!-- Due Date Input-->
                 <div class="form-group mb-3">
                     <label for="assignmentDueDate">Due Date</label>
                     <input type="date" class="form-control" id="assignmentDueDate" name="dueDate" required>
