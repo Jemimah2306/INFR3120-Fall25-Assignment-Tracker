@@ -9,23 +9,31 @@ module.exports = function(passport) {
     },
     async function(accessToken, refreshToken, profile, done) {
       try {
-        // Look for existing user
+        // 1️⃣ Check if user already exists by GitHub providerId
         let user = await User.findOne({ providerId: profile.id });
-        
-        if (user) {
-          // Existing user → login
-          return done(null, user);
+        if (user) return done(null, user);
+
+        // 2️⃣ Check if user exists by email (to avoid duplicate key error)
+        const email = profile.emails?.[0]?.value || null;
+        if (email) {
+          user = await User.findOne({ email });
+          if (user) {
+            // Link GitHub to existing user
+            user.provider = 'github';
+            user.providerId = profile.id;
+            await user.save();
+            return done(null, user);
+          }
         }
 
-        // New user → create in DB
+        // 3️⃣ If no existing user, create new one
         user = new User({
           provider: 'github',
           providerId: profile.id,
           username: profile.username,
-          email: profile.emails?.[0]?.value || '', // GitHub may not always provide email
+          email: email || '',
           avatar: profile.photos?.[0]?.value || ''
         });
-
         await user.save();
 
         return done(null, user);
