@@ -10,15 +10,25 @@ module.exports = function(passport) {
     async function(accessToken, refreshToken, profile, done) {
       try {
         // Look for existing user
-        const user = await User.findOne({ providerId: profile.id });
+        let user = await User.findOne({ providerId: profile.id });
         
         if (user) {
           // Existing user → login
           return done(null, user);
         }
 
-        // New user → pass profile info in "info" for the callback route
-        return done(null, false, { profile });
+        // New user → create in DB
+        user = new User({
+          provider: 'github',
+          providerId: profile.id,
+          username: profile.username,
+          email: profile.emails?.[0]?.value || '', // GitHub may not always provide email
+          avatar: profile.photos?.[0]?.value || ''
+        });
+
+        await user.save();
+
+        return done(null, user);
 
       } catch (err) {
         return done(err, null);
@@ -31,7 +41,11 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(async (id, done) => {
-    const user = await User.findById(id);
-    done(null, user);
+    try {
+      const user = await User.findById(id);
+      done(null, user);
+    } catch (err) {
+      done(err, null);
+    }
   });
 };
