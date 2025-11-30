@@ -23,29 +23,32 @@ router.get("/google",
 );
 
 router.get("/google/callback", (req, res, next) => {
-  passport.authenticate("google", (err, user, info) => {
+  passport.authenticate("google", async (err, user, info) => {
     if (err) return next(err);
 
-    if (user) {
-      // Existing user → log in
+    try {
+      if (!user && info && info.profile) {
+        // New user → create in DB
+        const profile = info.profile;
+        user = new User({
+          provider: "google",
+          providerId: profile.id,
+          displayName: profile.displayName,
+          email: profile.emails ? profile.emails[0].value : "",
+          avatar: profile.photos?.[0]?.value || ""
+        });
+        await user.save();
+      }
+
+      // Log in user
       req.logIn(user, (err) => {
         if (err) return next(err);
         return res.redirect("/"); // home page
       });
-    } else if (info && info.profile) {
-      // New user → redirect to register page with Google info
-      const profile = info.profile;
-      req.session.newUser = {
-        provider: "google",
-        providerId: profile.id,
-        displayName: profile.displayName,
-        email: profile.emails ? profile.emails[0].value : ""
-      };
-      return res.redirect("/auth/register");
-    } else {
-      req.flash("error", "Google authentication failed");
-      return res.redirect("/auth/login");
+    } catch (err) {
+      return next(err);
     }
+
   })(req, res, next);
 });
 
