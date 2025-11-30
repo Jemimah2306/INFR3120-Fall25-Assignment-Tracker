@@ -4,7 +4,7 @@ const taskController = require('../controllers/taskController');
 const { ensureAuth } = require('../middleware/authMiddleware');
 
 // List all assignments/tasks
-router.get('/list', ensureAuth, taskController.listTasks);
+router.get('/list', taskController.listTasks);
 
 // Protected — only authenticated users
 // Add new assignment
