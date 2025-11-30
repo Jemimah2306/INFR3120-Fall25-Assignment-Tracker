@@ -6,7 +6,7 @@ const { ensureAuth, ensureGuest } = require("../middleware/authMiddleware");
 
 // Login page
 router.get("/login", ensureGuest, (req, res) => {
-  res.render("auth/login", { title: "Login", error: req.flash("error")});
+  res.render("auth/login", { title: "Login", error: req.flash("error") });
 });
 
 // Register page
@@ -14,48 +14,47 @@ router.get("/register", ensureGuest, (req, res) => {
   res.render("auth/register", { title: "Register", error: req.flash("error") });
 });
 
-
 /* ------------------------------------
         GOOGLE AUTHENTICATION
 ------------------------------------- */
-router.get("/google",
+// Google authentication
+router.get(
+  "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
 router.get("/google/callback", (req, res, next) => {
-  passport.authenticate("google", async (err, user, info) => {
+  passport.authenticate("google", (err, user, info) => {
     if (err) return next(err);
 
-    try {
-      if (!user && info && info.profile) {
-        // New user → create in DB
-        const profile = info.profile;
-        user = new User({
-          provider: "google",
-          providerId: profile.id,
-          displayName: profile.displayName,
-          email: profile.emails ? profile.emails[0].value : "",
-          avatar: profile.photos?.[0]?.value || ""
-        });
-        await user.save();
-      }
-
-      // Log in user
+    if (user) {
+      // Existing user → log in
       req.logIn(user, (err) => {
         if (err) return next(err);
         return res.redirect("/"); // home page
       });
-    } catch (err) {
-      return next(err);
+    } else if (info && info.profile) {
+      // New user → redirect to register page with Google info
+      const profile = info.profile;
+      req.session.newUser = {
+        provider: "google",
+        providerId: profile.id,
+        displayName: profile.displayName || profile.username,
+        email: profile.emails ? profile.emails[0].value : "",
+      };
+      return res.redirect("/auth/register");
+    } else {
+      req.flash("error", "Google authentication failed");
+      return res.redirect("/auth/login");
     }
-
   })(req, res, next);
 });
 
 /* ------------------------------------
         GITHUB AUTHENTICATION
 ------------------------------------- */
-router.get("/github",
+router.get(
+  "/github",
   passport.authenticate("github", { scope: ["user:email"] })
 );
 
@@ -76,7 +75,7 @@ router.get("/github/callback", (req, res, next) => {
         provider: "github",
         providerId: profile.id,
         displayName: profile.displayName || profile.username,
-        email: profile.emails ? profile.emails[0].value : ""
+        email: profile.emails ? profile.emails[0].value : "",
       };
       return res.redirect("/auth/register");
     } else {
@@ -85,7 +84,6 @@ router.get("/github/callback", (req, res, next) => {
     }
   })(req, res, next);
 });
-
 
 /* ------------------------------------
         LOGOUT
