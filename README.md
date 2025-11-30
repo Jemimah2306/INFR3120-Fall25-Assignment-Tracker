@@ -108,6 +108,28 @@ View live site: [Render Deployment](https://infr3120-fall25-assignment-tracker.o
 All project files are tracked and maintained using Git for version control.
 .gitignore excludes any unnecessary or sensitive files. View repo: [GitHub Repository](https://github.com/Jemimah2306/INFR3120-Fall25-Assignment-Tracker)
 
+## 🔐 Google OAuth – Important Note (School Email Login)
+Google OAuth authentication works correctly with **personal Gmail accounts**.  
+However, **school Google accounts** (e.g., `@ontariotechu.net`) **cannot be used** due to Google Workspace for Education restrictions.
+
+### Why School Emails Do Not Work
+School accounts are managed by an administrator who blocks third-party app logins.  
+Attempting to log in with a school email may result in:
+
+```
+Error 400: admin_policy_enforced
+```
+
+### What Works
+- Personal Gmail accounts  
+- Non-school Google accounts  
+- All OAuth flows (redirect, callback, session creation) work with personal accounts
+
+### Assignment Submission Note
+- The application is fully functional  
+- Limitation on school accounts is due to university policy, not a code error  
+- Expected and unavoidable without admin permission
+
 ## License
 
 &copy; 2025 by Jemimah Adamu — All rights reserved.
